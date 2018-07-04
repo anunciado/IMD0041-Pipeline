@@ -1,0 +1,16 @@
+j comecou
+comecou:
+add $t0, $t1, $t2
+j A
+A:
+bne $t2, $t1, B
+j C
+B:
+sw $t2, 64($t0)
+j C
+C:
+sub $s1, $s0, $t1
+j D
+D:
+add $t0, $t1, $t2
+

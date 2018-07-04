@@ -1,0 +1,4 @@
+add $t1, $t0, $t2
+add $t4, $t5, $t6
+sub $s1, $t3, $t1
+add $t1, $t0, $t2

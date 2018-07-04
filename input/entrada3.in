@@ -1,0 +1,5 @@
+add $t0, $t1, $t2
+sub $s1, $s0, $t1
+add $t0, $s1, $t2
+sw $t2, 64($t0)
+lw $t0, 64($t2)
