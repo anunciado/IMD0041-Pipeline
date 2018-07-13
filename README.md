@@ -1,10 +1,48 @@
-1 SIMULADOR DE PIPELINE
-    O simulador de pipeline será a implementação de uma ferramenta que simula a execução em pipeline 5 estágios do MIPS. O simulador receberá como entrada um conjunto de instruções em Assembly MIPS, simula a execução dessas instruções considerando todas as dependências de dados e conflitos estruturais e, tem como saída, a quantidade de ciclos necessários para executar essas instruções e a informação sobre os estágios em cada ciclo.
-1.1 DESCRIÇÃO
-    Neste contexto, o projeto recebeu algumas restrições na forma de execução e saída, onde foi considerado um pipeline de 5 estágios na arquitetura Harvard onde os estágios são: IF, ID, EX, MEM, WB. Também para esse projeto foi restrito apenas as instruções ADD, SUB, BEQ, BNE, LW, SW e JUMP. Também não podendo haver reordenação e redirecionamento das instruções para otimização de ciclos. Assim o programa terá que no caso de conflito de dados, que a ferramenta seja capaz de detectar as dependências de dados e parar o pipeline até que a dependência e no caso de conflito de controle, onde haja funções que irá ter labels, sempre será tomado o salto.
-1.2 FUNCIONAMENTO
-    Para essa implementação, foi utilizado a linguagem C++ com a utilização de duas bibliotecas não padrão da linguagem, sendo elas: a string, onde as strings declaradas se comportam como objetos que representam sequências de caracteres; e a vector, onde os vector quando declarados se comportam como vetores de quaisquer tipos de dados, onde internamente são alocadas dinamicamente para armazenar os seus elementos.
-    O programa se baseia na seguinte lógica, será alocado em um vector de strings todas as linhas de código, logo após, será inicializado um vector de strings com “0” para cada estágio de execução em seu pior caso, ou seja, havendo dependência em todas as linhas de código. Posteriormente, será lido cada cada instrução, onde será testado as dependências de registradores com a linha de código executada anteriormente e colocado o atraso no primeiro ciclo de execução da linha lida, na perspectiva de bolhas se for preciso, caso contrário, já será posto sua inicialização. Em ambas perspectivas ditas anteriormente, será lido o ciclo atual de execução e posto no vector de cada estágio a linha de código lida, fazendo com que a mesma passe por todos os estágios, ciclo após ciclo, até sua conclusão. Também quando for posta funções que terão que pular para um label, será procurado o label nas instruções abaixo e logo após será alocado novamente em cada ciclo correspondente, respeitando as dependências. Depois de alocadas todas as instruções, será mostrado na tela a quantidade de ciclos para execução do programa no paradigma posto na descrição e será mostrado sua execução por ciclo, assim terminando a execução do programa.
-Para execução do programa, terá que ser posto na pasta strings do programa um arquivo de entrada qualquer, como por exemplo, entrada.in, assim será preciso via terminal do linux receber o arquivo de entrada (em formato .in) com as instruções e criar um arquivo com resultado final da implementação do programa, como por exemplo, saida.out, onde a linha escrita no terminal deverá ser assim:
-usuario@usuario-pc:~/lab01/strings$ bin/lab01 < entrada.in > saida.out
+# Pipeline
 
+The pipeline simulator will be the implementation of a tool that simulates pipeline execution 5 stages of MIPS. The simulator will receive as input a set of instructions in Assembly MIPS, simulates the execution of these instructions considering all data dependencies and structural conflicts, and has as output the amount of cycles required to execute these instructions and the information about the stages in each cycle.
+
+In this context, the project received some restrictions in the form of execution and exit, where it was considered a pipeline of 5 stages in the architecture Harvard where the stages are: IF, ID, EX, MEM, WB. Also for this project was restricted only the instructions ADD, SUB, BEQ, BNE, LW, SW and JUMP. Also, there can be no reordering and redirection of instructions for optimizing cycles. So the program will have in the case of data conflict, that the tool will be able to detect the data dependencies and stop the pipeline until the dependency and in the case of control conflict, where there are functions that will have labels, will always be taken the jump.
+
+For this implementation, the C ++ language was used with the use of two non-standard libraries of the language, being: the string, where the declared strings behave like objects that represent sequences of characters; and the vector, where the vector when declared behave as vectors of any data types, where they are internally allocated dynamically to store their elements.
+
+The program is based on the following logic, it will be allocated in a vector of strings all the lines of code, soon after, a vector of strings with "0" will be initialized for each stage of execution in its worst case, that is, if there is dependence in all lines of code. Afterwards, each instruction will be read, where the dependencies of registers will be tested with the previously executed code line and the delay is placed in the first cycle of execution of the read line, in the perspective of bubbles if it is necessary, otherwise, its initialization. In both perspectives, the current execution cycle will be read and the code line read in the vector of each stage, making it go through all stages, cycle after cycle, until its conclusion. Also when you put functions that will have to jump to a label, the label will be searched in the instructions below and soon after it will be allocated again in each corresponding cycle, respecting the dependencies. After all the instructions have been allocated, the number of cycles to execute the program in the paradigm put in the description will be shown on the screen and its execution will be shown per cycle, thus ending the execution of the program.
+In order to execute the program, any input file, such as input.in, must be put in the program's strings folder, so it will be necessary via the Linux terminal to receive the input file (in .in format) with the instructions and create a file with the final result of the program implementation, such as output.out.
+    
+### Prerequisites
+
+You will need to install the modules below to run the program: 
+* [GCC 8.1 or greater](http://gcc.gnu.org/)
+
+### Running
+
+To run this software, we gonna compile in the terminal:
+1. Enter the folder and compile all the .cpp files with the following command:
+```
+$ make
+```
+2. Enter the bin folder and run the following command:
+```
+$ ./lab01 < <input> > <output>
+```
+An example would be:
+```
+$ ./lab01 < entrada.in > saida.out
+```
+3. From this it only interacts with the system.
+
+## Built With
+
+* [Atom](https://atom.io/) - A code editor used
+
+## Authors
+### Developers: 
+* **Luís Eduardo Anunciado Silva ([cruxiu@ufrn.edu.br](mailto:cruxiu@ufrn.edu.br))** 
+### Project Advisor: 
+* **Gustavo Girao Barreto Da Silva ([girao@imd.ufrn.br](mailto:girao@imd.ufrn.br))** 
+
+See also the list of [contributors](https://github.com/cruxiu/IMD0041-Pipeline/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the GPL 3.0 - see the [LICENSE](LICENSE) file for details
